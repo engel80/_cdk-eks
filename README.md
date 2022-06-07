@@ -105,31 +105,52 @@ cdk deploy
 ## Structure
 
 ```text
+.
 ├── build.gradle
-├── package.json
+├── cluster-config.ts
 ├── ssm-prefix.ts
+├── package-lock.json
+├── package.json
 ├── tsconfig.json
-├── vpc
-│   ├── bin
-│   │   └── index.ts
-│   ├── cdk.json
-│   └── lib
-│       └── vpc-stack.ts
-├── eks-cluster
-│   ├── bin
-│   │   └── index.ts
-│   ├── cdk.json
-│   ├── lib
-│   │   ├── cluster-config.ts
-│   │   └── cluster-stack.ts
-│   └── settings.yaml
 ├── app
-│   ├── Dockerfile
-│   ├── README.md
-│   ├── build.sh
-│   ├── flask_api.py
-│   ├── gunicorn.config.py
-│   └── requirements.txt
+│   ├── Dockerfile
+│   ├── cpu-hpa.yml
+│   ├── flask_api.py
+│   ├── gpu-hpa.yml
+│   ├── gunicorn.config.py
+│   ├── requirements.txt
+│   └── sample-rest-api.yaml
+├── eks-appdeploy
+├── eks-cluster
+│   ├── bin
+│   │   └── index.ts
+│   ├── cdk.json
+│   ├── jest.config.js
+│   └── lib
+│       └── cluster-stack.ts
+├── eks-cluster-nodegroup
+│   ├── bin
+│   │   └── index.ts
+│   ├── cdk.json
+│   ├── jest.config.js
+│   └── lib
+│       ├── cluster-config.ts
+│       └── cluster-stack.ts
+├── eks-nodegroup
+│   ├── bin
+│   │   └── index.ts
+│   ├── cdk.json
+│   ├── jest.config.js
+│   └── lib
+│       └── nodegroup-stack.ts
+├── internal
+│   └── cluster-stack.ts
+└── vpc
+    ├── bin
+    │   └── index.ts
+    ├── cdk.json
+    └── lib
+        └── vpc-stack.ts
 ```
 
 ## Reference
