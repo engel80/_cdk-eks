@@ -23,18 +23,17 @@ export class EksNodegroupStack extends Stack {
         const clusterName = `${CLUSTER_NAME}-${stage}`;
         const openidProviderArn = ssm.StringParameter.valueFromLookup(this, `/${clusterName}/openid-connect-provider-arn`);
         const kubectlRoleArn = ssm.StringParameter.valueFromLookup(this, `/${clusterName}/kubectl-role-arn`)
-
         const openIdConnectProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(this, 'importedProviderArn',
             Lazy.string({ produce: () => openidProviderArn }));
         
         const cluster = eks.Cluster.fromClusterAttributes(this, clusterName, {
             vpc,
-            clusterName: clusterName,
+            clusterName,
             openIdConnectProvider,
             kubectlRoleArn: Lazy.string({ produce: () => kubectlRoleArn })
         });
         const nodegroup = new eks.Nodegroup(this, 'nodegroup', {
-            cluster: cluster,
+            cluster,
             nodegroupName: 'cpu-ng',
             instanceTypes: [new ec2.InstanceType(INSTANCE_TYPE)],
             minSize: 2,
@@ -46,8 +45,8 @@ export class EksNodegroupStack extends Stack {
         const createGpuCluster = false; 
         if (createGpuCluster) {
             const gpuNodegroup = new eks.Nodegroup(this, 'gpu-nodegroup', {
-                cluster: cluster,
-                nodegroupName: 'cpu-ng',
+                cluster,
+                nodegroupName: 'gpu-ng',
                 instanceTypes: [new ec2.InstanceType(GPU_INSTANCE_TYPE)],
                 labels: { 'accelerator': 'nvidia-gpu' },
                 minSize: 1,
