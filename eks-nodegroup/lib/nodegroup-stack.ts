@@ -1,4 +1,3 @@
-// import { Stack, StackProps, , Duration } from 'aws-cdk-lib';
 import { Stack, StackProps, CfnOutput, Duration, Lazy } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as eks from 'aws-cdk-lib/aws-eks';
