@@ -54,7 +54,7 @@ cdk deploy
 cdk deploy -c vpcId=<vpc-id>
 ```
 
-[eks-cluster/lib/cluster-stack](./eks-cluster/lib/cluster-stack)
+[eks-cluster/lib/cluster-stack.ts](./eks-cluster/lib/cluster-stack.ts)
 
 SSM parameter:
 
