@@ -5,7 +5,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 
-import { CLUSTER_NAME } from '../../cluster-config';
+import { CLUSTER_NAME, GPU_INSTANCE_TYPE } from '../../cluster-config';
 import { INSTANCE_TYPE } from '../../cluster-config';
 import { SSM_PREFIX } from '../../ssm-prefix';
 
@@ -43,16 +43,19 @@ export class EksNodegroupStack extends Stack {
         });
         nodegroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
 
-        // const gpuNodegroup = new eks.Nodegroup(this, 'gpu-nodegroup', {
-        //     cluster: cluster,
-        //     nodegroupName: 'cpu-ng',
-        //     instanceTypes: [new ec2.InstanceType('p2.xlarge')],
-        //     labels: { 'accelerator': 'nvidia-gpu' },
-        //     minSize: 1,
-        //     maxSize: 10,
-        //     // capacityType: eks.CapacityType.SPOT
-        // });
-        // gpuNodegroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
+        const createGpuCluster = false; 
+        if (createGpuCluster) {
+            const gpuNodegroup = new eks.Nodegroup(this, 'gpu-nodegroup', {
+                cluster: cluster,
+                nodegroupName: 'cpu-ng',
+                instanceTypes: [new ec2.InstanceType(GPU_INSTANCE_TYPE)],
+                labels: { 'accelerator': 'nvidia-gpu' },
+                minSize: 1,
+                maxSize: 10,
+                // capacityType: eks.CapacityType.SPOT
+            });
+            gpuNodegroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
+        }
 
         new CfnOutput(this, 'WebConsoleUrl', { value: `https://${this.region}.console.aws.amazon.com/eks/home?#/clusters/${cluster.clusterName}?selectedTab=cluster-compute-tab` });
         new CfnOutput(this, 'NodegroupName', { value: nodegroup.nodegroupName });

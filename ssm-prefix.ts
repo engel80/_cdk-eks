@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * /cdk-eks/vpc-id
  * 
