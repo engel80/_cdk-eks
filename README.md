@@ -118,6 +118,7 @@ kubectl apply -f sample-rest-api.yaml
 
 [app/sample-rest-api-template.yaml](./app/sample-rest-api-template.yaml)
 
+
 ## Uninstall
 
 ```bash
