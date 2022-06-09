@@ -1,6 +1,6 @@
-# CDK ECS Sample
+# CDK EKS Sample
 
-## Prequisets
+## Prerequisite
 
 ```bash
 npm install -g aws-cdk@2.27.0
