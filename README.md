@@ -93,14 +93,13 @@ aws ecr create-repository --repository-name sample-rest-api --region ${REGION}
 Build and push to ECR:
 
 ```bash
-cd app
-
 REGION=$(aws configure get default.region)
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 
 echo "ACCOUNT_ID: $ACCOUNT_ID"
 echo "REGION: $REGION"
 
+cd app
 docker build -t sample-rest-api .
 docker tag sample-rest-api:latest ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/sample-rest-api:latest
 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
