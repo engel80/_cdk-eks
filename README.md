@@ -96,10 +96,10 @@ cd eks-nodegroup
 cdk destroy
 
 cd ../eks-cluster
-cdk deploy
+cdk destroy
 
 cd ../vpc
-cdk deploy
+cdk destroy
 ```
 
 ## Structure
@@ -143,8 +143,6 @@ cdk deploy
 │   ├── jest.config.js
 │   └── lib
 │       └── nodegroup-stack.ts
-├── internal
-│   └── cluster-stack.ts
 └── vpc
     ├── bin
     │   └── index.ts
