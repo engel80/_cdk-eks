@@ -81,11 +81,43 @@ clusterName: eks-cluster-local, eks-cluster-dev, eks-cluster-stg
 
 [eks-nodegroup/lib/nodegroup-stack.ts](./eks-nodegroup/lib/nodegroup-stack.ts)
 
-### Step 4: Deploy
+### Step 3: Build
+
+Create an ECR for sample RESTful API:
 
 ```bash
-TBD
+REGION=$(aws configure get default.region)
+aws ecr create-repository --repository-name sample-rest-api --region ${REGION}
 ```
+
+Build and push to ECR:
+
+```bash
+cd app
+
+REGION=$(aws configure get default.region)
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+echo "ACCOUNT_ID: $ACCOUNT_ID"
+echo "REGION: $REGION"
+
+docker build -t sample-rest-api .
+docker tag sample-rest-api:latest ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/sample-rest-api:latest
+aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
+docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/sample-rest-api:latest
+```
+
+### Step 4: Deploy
+
+Create a YAML file for K8s Deployment, Service, HorizontalPodAutoscaler, and Ingress using a template file.
+
+```bash
+sed -e "s|<account-id>|${ACCOUNT_ID}|g" sample-rest-api-template.yaml | sed -e "s|<region>|${REGION}|g" > sample-rest-api.yaml
+cat sample-rest-api.yaml
+kubectl apply -f sample-rest-api.yaml
+```
+
+[app/sample-rest-api-template.yaml](./app/sample-rest-api-template.yaml)
 
 ## Uninstall
 
