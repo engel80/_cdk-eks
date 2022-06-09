@@ -10,9 +10,9 @@ import { INSTANCE_TYPE } from './cluster-config';
 import { SSM_PREFIX } from '../../ssm-prefix';
 
 /**
- * Total time: 1355.39s
  * 
- * AmazonSSMManagedInstanceCore role is added to connect to EC2 instance by using SSM on AWS web console
+ * 
+ * 
  */
 export class EksClusterStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -52,7 +52,6 @@ export class EksClusterStack extends Stack {
                 eks.ClusterLoggingTypes.SCHEDULER
             ],
         });
-        cluster.defaultNodegroup?.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
 
         const certParam = new ssm.StringParameter(this, 'ssmClutsterCertificateAuthority',
             { parameterName: `/${clusterName}/cluster-certificate-authority`, stringValue: cluster.clusterCertificateAuthorityData });
