@@ -114,12 +114,10 @@ cdk destroy
 ├── tsconfig.json
 ├── app
 │   ├── Dockerfile
-│   ├── cpu-hpa.yml
 │   ├── flask_api.py
-│   ├── gpu-hpa.yml
 │   ├── gunicorn.config.py
 │   ├── requirements.txt
-│   └── sample-rest-api.yaml
+│   └── sample-rest-api-template.yaml
 ├── eks-appdeploy
 ├── eks-cluster
 │   ├── bin
