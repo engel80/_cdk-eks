@@ -81,7 +81,7 @@ clusterName: eks-cluster-local, eks-cluster-dev, eks-cluster-stg
 
 [eks-nodegroup/lib/nodegroup-stack.ts](./eks-nodegroup/lib/nodegroup-stack.ts)
 
-### Step 3: Build
+### Step 4: Build
 
 Create an ECR for sample RESTful API:
 
@@ -107,7 +107,7 @@ aws ecr get-login-password --region ${REGION} | docker login --username AWS --pa
 docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/sample-rest-api:latest
 ```
 
-### Step 4: Deploy
+### Step 5: Deploy
 
 Create a YAML file for K8s Deployment, Service, HorizontalPodAutoscaler, and Ingress using a template file.
 
