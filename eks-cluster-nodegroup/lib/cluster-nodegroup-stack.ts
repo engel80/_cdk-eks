@@ -5,17 +5,15 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 
-import { CLUSTER_NAME } from './cluster-config';
-import { INSTANCE_TYPE } from './cluster-config';
-import { GPU_INSTANCE_TYPE } from './cluster-config';
+import { CLUSTER_NAME } from '../../cluster-config';
+import { INSTANCE_TYPE } from '../../cluster-config';
+import { GPU_INSTANCE_TYPE } from '../../cluster-config';
 import { SSM_PREFIX } from '../../ssm-prefix';
 
 /**
- * 
- * 
  * AmazonSSMManagedInstanceCore role is added to connect to EC2 instance by using SSM on AWS web console
  */
-export class EksClusterStack extends Stack {
+export class EksClusterNodegroupStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
@@ -63,15 +61,18 @@ export class EksClusterStack extends Stack {
             capacityType: eks.CapacityType.SPOT
         });
         cpuNodeGroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
-        // const gpuNodeGroup = cluster.addNodegroupCapacity('gpu-ng', {
-        //     nodegroupName: 'gpu-ng',
-        //     instanceTypes: [new ec2.InstanceType(GPU_INSTANCE_TYPE)],
-        //     labels: { 'accelerator': 'nvidia-gpu' },
-        //     minSize: 1,
-        //     maxSize: 10
-        // });
-        // gpuNodeGroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
 
+        const isCreateGpuNodegroup = false;
+        if (isCreateGpuNodegroup) {
+            const gpuNodeGroup = cluster.addNodegroupCapacity('gpu-ng', {
+                nodegroupName: 'gpu-ng',
+                instanceTypes: [new ec2.InstanceType(GPU_INSTANCE_TYPE)],
+                labels: { 'accelerator': 'nvidia-gpu' },
+                minSize: 1,
+                maxSize: 10
+            });
+            gpuNodeGroup.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'));
+        }
         new CfnOutput(this, 'ClusterName', { value: cluster.clusterName });
         new CfnOutput(this, 'ClusterArn', { value: cluster.clusterArn });
         new CfnOutput(this, 'ClusterEndpoint', { value: cluster.clusterEndpoint });

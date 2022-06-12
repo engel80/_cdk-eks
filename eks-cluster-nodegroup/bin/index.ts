@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
 
-import { EksClusterStack } from '../lib/cluster-stack';
-import { CLUSTER_NAME } from '../lib/cluster-config';
+import { EksClusterNodegroupStack } from '../lib/cluster-nodegroup-stack';
+import { CLUSTER_NAME } from '../../cluster-config';
 
 const app = new cdk.App();
 const env = {
@@ -12,4 +12,4 @@ const env = {
 const stage = app.node.tryGetContext('stage') || 'local';
 
 // eks-cluster-{stage}
-new EksClusterStack(app, `${CLUSTER_NAME}-${stage}`, { env });
+new EksClusterNodegroupStack(app, `${CLUSTER_NAME}-${stage}`, { env });
