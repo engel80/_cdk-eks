@@ -1,5 +1,15 @@
 # CDK EKS Sample
 
+Sample project for CDK EKS with Typescript.
+
+Table Of Contents
+
+1. VPC
+2. EKS cluster
+3. EKS nodegroup
+4. Build
+5. Deploy
+
 ## Prerequisite
 
 ```bash
@@ -118,7 +128,6 @@ kubectl apply -f sample-rest-api.yaml
 
 [app/sample-rest-api-template.yaml](./app/sample-rest-api-template.yaml)
 
-
 ## Uninstall
 
 ```bash
@@ -164,8 +173,7 @@ cdk destroy
 │   ├── cdk.json
 │   ├── jest.config.js
 │   └── lib
-│       ├── cluster-config.ts
-│       └── cluster-stack.ts
+│       └── cluster-nodegroup-stack.ts
 ├── eks-nodegroup
 │   ├── bin
 │   │   └── index.ts
@@ -183,4 +191,12 @@ cdk destroy
 
 ## Reference
 
-TBD
+### CDK Lib
+
+* [EKS](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_eks-readme.html)
+
+* [EKS ALB Controller](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_eks-readme.html#alb-controller)
+
+* [IAM](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_iam-readme.html)
+
+* [SSM](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ssm-readme.html)
