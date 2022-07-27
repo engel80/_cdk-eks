@@ -1,4 +1,4 @@
-import { Stack, StackProps, CfnOutput, Duration } from 'aws-cdk-lib';
+import { Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as eks from 'aws-cdk-lib/aws-eks';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -6,7 +6,6 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 
 import { CLUSTER_NAME } from './cluster-config';
-import { INSTANCE_TYPE } from './cluster-config';
 import { SSM_PREFIX } from '../../ssm-prefix';
 
 /**

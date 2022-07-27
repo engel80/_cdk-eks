@@ -132,6 +132,7 @@ kubectl apply -f sample-rest-api.yaml
 
 ```bash
 find . -name "cdk.context.json" -exec rm -f {} \;
+find . -name "cdk.out" -exec rm -rf {} \;
 
 cd eks-nodegroup
 cdk destroy

@@ -12,6 +12,7 @@
 *.zip
 *.tar.gz
 *.rar
+*.hprof
 
 # internal
 *internal*
