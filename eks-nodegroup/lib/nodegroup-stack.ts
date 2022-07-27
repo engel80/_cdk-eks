@@ -5,8 +5,7 @@ import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 
-import { CLUSTER_NAME, GPU_INSTANCE_TYPE } from '../../cluster-config';
-import { INSTANCE_TYPE } from '../../cluster-config';
+import { CLUSTER_NAME, INSTANCE_TYPE, GPU_INSTANCE_TYPE } from '../../cluster-config';
 import { SSM_PREFIX } from '../../ssm-prefix';
 
 /**
