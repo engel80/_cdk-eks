@@ -11,5 +11,4 @@ const env = {
 };
 const stage = app.node.tryGetContext('stage') || 'local';
 
-// eks-cluster-{stage}
 new EksClusterStack(app, `${CLUSTER_NAME}-${stage}`, { env });
