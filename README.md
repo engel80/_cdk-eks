@@ -1,8 +1,10 @@
 # CDK EKS Sample
 
-Sample project for CDK EKS with Typescript.
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=engel80_cdk-eks&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=engel80_cdk-eks)  [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=engel80_cdk-eks&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=engel80_cdk-eks)
 
-Table Of Contents
+EKS sample project with CDK.
+
+## Table of Contents
 
 1. VPC
 2. EKS cluster
@@ -10,7 +12,7 @@ Table Of Contents
 4. Build
 5. Deploy
 
-## Prerequisite
+## Prerequisites
 
 ```bash
 npm install -g aws-cdk@2.27.0
@@ -29,13 +31,13 @@ Use the `cdk` command-line toolkit to interact with your project:
 
 ## CDK Stack
 
-| Stack                         | Time    |
-|-------------------------------|---------|
-| VPC                           | 4m      |
-| EKS cluster                   | 13m     |
-| EKS nodegroups                | 10m     |
-| Deploy(including ALB)         | 4m      |
-| Total                         | 31m     |
+|   | Stack                         | Time    |
+|---|-------------------------------|---------|
+| 1 | VPC                           | 4m      |
+| 2 | EKS cluster                   | 13m     |
+| 3 | EKS nodegroups                | 10m     |
+| 4 | Deploy(including ALB)         | 4m      |
+|   | Total                         | 31m     |
 
 ## Install
 
